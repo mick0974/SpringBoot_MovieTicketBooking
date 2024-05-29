@@ -70,26 +70,26 @@ public class TicketBookingController {
 	}
 	
 //	Add Theater to the table
-	@PostMapping("/{city}/theater")
-	public Theater createTheater(@PathVariable(value="city") long city, @Valid @RequestBody HashMap<String, String> requestData) {
+	@PostMapping("/{cityId}/theater")
+	public Theater createTheater(@PathVariable(value="cityId") long city, @Valid @RequestBody HashMap<String, String> requestData) {
 //		return theTheaterDAO.save(t);
 		Theater theTheater = new Theater();
-		theTheater.setT_name(requestData.get("name"));
-		theTheater.setT_area(requestData.get("area"));
+		theTheater.setTheaterName(requestData.get("name"));
+		theTheater.setTheaterArea(requestData.get("area"));
 		City theCity = theCityDAO.findOne(city);
 		theTheater.setCity(theCity);
 		return theTheaterDAO.save(theTheater);
 	}
 	
 //	adding show for a theater and movie
-	@PostMapping("/{ID}/{id}/show")
-	public Show addingShow(@PathVariable(value = "ID") long ID, @PathVariable(value = "id") long id, @Valid @RequestBody HashMap<String, String> requestData) {
+	@PostMapping("/{theaterId}/{movieId}/show")
+	public Show addingShow(@PathVariable(value = "theaterId") long ID, @PathVariable(value = "movieId") long id, @Valid @RequestBody HashMap<String, String> requestData) {
 		Theater theTheater = theTheaterDAO.findOne(ID);
 		Movie theMovie = theMovieDAO.findOne(id);
 		Show theShow = new Show();
 		Show theResponseShow = new Show();
 		Bookings theBookings = new Bookings();
-		theShow.setShow_time(requestData.get("time"));
+		theShow.setShow_time(requestData.get("show_time"));
 		theShow.setTheMovie(theMovie);
 		theShow.setTheTheater(theTheater);
 		theResponseShow = theShowDAO.save(theShow);
@@ -121,8 +121,8 @@ public class TicketBookingController {
 	
 //	get City by particular ID
 	
-	@GetMapping("/city/{ID}")
-	public ResponseEntity<City> getOneCity(@PathVariable(value="ID") long ID){
+	@GetMapping("/city/{cityId}")
+	public ResponseEntity<City> getOneCity(@PathVariable(value="cityId") long ID){
 		City theCity = theCityDAO.findOne(ID);
 		if(theCity == null) {
 			 return ResponseEntity.notFound().build();
@@ -133,8 +133,8 @@ public class TicketBookingController {
 	
 //	Get movie by particular ID
 	
-	@GetMapping("/movie/{ID}")
-	public ResponseEntity<Movie> getOneMovie(@PathVariable(value="ID") long ID){
+	@GetMapping("/movie/{movieId}")
+	public ResponseEntity<Movie> getOneMovie(@PathVariable(value="movieId") long ID){
 		Movie theMovie = theMovieDAO.findOne(ID);
 		if(theMovie == null) {
 			return ResponseEntity.notFound().build();
@@ -143,8 +143,8 @@ public class TicketBookingController {
 	}
 	
 //	Get Theater By particular ID
-	@GetMapping("/theater/{ID}")
-	public ResponseEntity<Theater> getOneTheater(@PathVariable(value="ID") long ID){
+	@GetMapping("/theater/{theaterId}")
+	public ResponseEntity<Theater> getOneTheater(@PathVariable(value="theaterId") long ID){
 		Theater theTheater = theTheaterDAO.findOne(ID);
 		if(theTheater == null) {
 			return ResponseEntity.notFound().build();
@@ -157,8 +157,8 @@ public class TicketBookingController {
 	
 	
 //	Update the City 
-	@PutMapping("/city/{ID}")
-	public ResponseEntity<City> updateCity(@PathVariable(value="ID") long ID, @Valid @RequestBody City c){
+	@PutMapping("/city/{cityId}")
+	public ResponseEntity<City> updateCity(@PathVariable(value="cityId") long ID, @Valid @RequestBody City c){
 		
 		City theCity = theCityDAO.findOne(ID);
 		
@@ -176,30 +176,30 @@ public class TicketBookingController {
 	}
 	
 //	update Movie
-	@PutMapping("/movie/{ID}")
-	public ResponseEntity<Movie> updateMovie(@PathVariable(value="ID") long ID,@Valid @RequestBody Movie m){
+	@PutMapping("/movie/{movieId}")
+	public ResponseEntity<Movie> updateMovie(@PathVariable(value="movieId") long ID,@Valid @RequestBody Movie m){
 		Movie theMovie = theMovieDAO.findOne(ID);
 		if(theMovie == null) {
 			return ResponseEntity.notFound().build();
 		}
-		theMovie.set_name(m.get_name());
-		theMovie.set_director(m.get_director());
-		theMovie.set_description(m.get_description());
+		theMovie.setMovieName(m.getMovieName());
+		theMovie.setDirector(m.getDirector());
+		theMovie.setDescription(m.getDescription());
 		
 		Movie updatedMovie = theMovieDAO.save(theMovie);
 		return ResponseEntity.ok().body(updatedMovie);
 	}
 	
 //	update theater
-	@PutMapping("/theater/{ID}")
-	public ResponseEntity<Theater> updatetheater(@PathVariable(value="ID") long ID, @Valid @RequestBody Theater t){
+	@PutMapping("/theater/{theaterId}")
+	public ResponseEntity<Theater> updatetheater(@PathVariable(value="theaterId") long ID, @Valid @RequestBody Theater t){
 		
 		Theater theTheater = theTheaterDAO.findOne(ID);
 		if(theTheater == null) {
 			return ResponseEntity.notFound().build();
 		}
-		theTheater.setT_name(t.getT_name());
-		theTheater.setT_area(t.getT_area());
+		theTheater.setTheaterName(t.getTheaterName());
+		theTheater.setTheaterArea(t.getTheaterArea());
 		
 		Theater updatedTheater = theTheaterDAO.save(theTheater);
 		return ResponseEntity.ok().body(updatedTheater);
@@ -211,8 +211,8 @@ public class TicketBookingController {
 	
 	
 //	Delete City Data
-	@DeleteMapping("/city/{ID}")
-	public ResponseEntity<City> deleteCity(@PathVariable(value="ID") long ID){
+	@DeleteMapping("/city/{cityId}")
+	public ResponseEntity<City> deleteCity(@PathVariable(value="cityId") long ID){
 		
 		City theCity = theCityDAO.findOne(ID);
 		if(theCity == null) {
@@ -225,8 +225,8 @@ public class TicketBookingController {
 	}
 	
 //	Delete a Movie
-	@DeleteMapping("/movie/{ID}")
-	public ResponseEntity<Movie> deleteMovie(@PathVariable(value= "ID") long ID){
+	@DeleteMapping("/movie/{movieId}")
+	public ResponseEntity<Movie> deleteMovie(@PathVariable(value= "movieId") long ID){
 		Movie theMovie = theMovieDAO.findOne(ID);
 		if(theMovie == null) {
 			return ResponseEntity.notFound().build();
@@ -236,8 +236,8 @@ public class TicketBookingController {
 	}
 	
 //   Delete a theater
-	@DeleteMapping("/theater/{ID}")
-	public ResponseEntity<Theater> deleteTheater(@PathVariable(value = "ID") long ID){
+	@DeleteMapping("/theater/{theaterId}")
+	public ResponseEntity<Theater> deleteTheater(@PathVariable(value = "theaterId") long ID){
 		Theater theTheater = theTheaterDAO.findOne(ID);
 		if(theTheater == null) {
 			return ResponseEntity.notFound().build();
