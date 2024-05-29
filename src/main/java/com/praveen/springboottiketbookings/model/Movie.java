@@ -20,50 +20,50 @@ public class Movie {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long M_id;
+	private long movieId;
 	
 	@NotBlank
-	private String M_name;
+	private String movieName;
 	
 	@NotBlank
-	private String M_director;
+	private String director;
 	
 	
-	private String M_description;
+	private String description;
 	
 	@OneToMany(mappedBy = "theMovie")
 	public List<Show> theShow;
 
-	public long get_id() {
-		return M_id;
+	public long getMovieId() {
+		return movieId;
 	}
 
-	public void set_id(long m_id) {
-		M_id = m_id;
+	public void setMovieId(long m_id) {
+		movieId = m_id;
 	}
 
-	public String get_name() {
-		return M_name;
+	public String getMovieName() {
+		return movieName;
 	}
 
-	public void set_name(String m_name) {
-		M_name = m_name;
+	public void setMovieName(String m_name) {
+		movieName = m_name;
 	}
 
-	public String get_director() {
-		return M_director;
+	public String getDirector() {
+		return director;
 	}
 
-	public void set_director(String m_director) {
-		M_director = m_director;
+	public void setDirector(String m_director) {
+		director = m_director;
 	}
 
-	public String get_description() {
-		return M_description;
+	public String getDescription() {
+		return description;
 	}
 
-	public void set_description(String m_description) {
-		M_description = m_description;
+	public void setDescription(String m_description) {
+		description = m_description;
 	}
 	
 	

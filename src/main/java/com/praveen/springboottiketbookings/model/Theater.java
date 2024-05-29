@@ -26,13 +26,13 @@ public class Theater {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long T_id;
+	private long theaterId;
 	
 	@NotBlank
-	private String T_name;
+	private String theaterName;
 	
 	@NotBlank
-	private String T_area;
+	private String theaterArea;
 	
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
@@ -65,28 +65,28 @@ public class Theater {
 		this.city = city;
 	}
 
-	public long getT_id() {
-		return T_id;
+	public long getTheaterId() {
+		return theaterId;
 	}
 
-	public void setT_id(long t_id) {
-		T_id = t_id;
+	public void setTheaterId(long theaterId) {
+		this.theaterId = theaterId;
 	}
 
-	public String getT_name() {
-		return T_name;
+	public String getTheaterName() {
+		return theaterName;
 	}
 
-	public void setT_name(String t_name) {
-		T_name = t_name;
+	public void setTheaterName(String theaterName) {
+		this.theaterName = theaterName;
 	}
 
-	public String getT_area() {
-		return T_area;
+	public String getTheaterArea() {
+		return theaterArea;
 	}
 
-	public void setT_area(String t_area) {
-		T_area = t_area;
+	public void setTheaterArea(String theaterArea) {
+		this.theaterArea = theaterArea;
 	}
 	
 	

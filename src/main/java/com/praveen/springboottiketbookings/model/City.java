@@ -22,51 +22,51 @@ public class City {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long C_id;
+	private long cityId;
 	
 	@Column(nullable=false)
 	@NotBlank
-	private String C_name;
+	private String cityName;
 	
 	@NotBlank
-	private String C_pincode;
+	private String pincode;
 	
 	@NotBlank
-	private String C_state;
+	private String state;
 	
 	@OneToMany(mappedBy="city")
 	private List<Theater> theTheater;
 
-	public long getID() {
-		return C_id;
+	public long getCityId() {
+		return cityId;
 	}
 
-	public void setID(long iD) {
-		C_id = iD;
+	public void setCityId(long iD) {
+		cityId = iD;
 	}
 
 	public String getName() {
-		return C_name;
+		return cityName;
 	}
 
 	public void setName(String name) {
-		this.C_name = name;
+		this.cityName = name;
 	}
 
 	public String getPincode() {
-		return C_pincode;
+		return pincode;
 	}
 
 	public void setPincode(String pincode) {
-		this.C_pincode = pincode;
+		this.pincode = pincode;
 	}
 
 	public String getState() {
-		return C_state;
+		return state;
 	}
 
 	public void setState(String state) {
-		this.C_state = state;
+		this.state = state;
 	}
 	
 	

@@ -53,8 +53,8 @@ public class EndUserContoller {
 	
 //	GEt list of theater Available against a City
 	
-	@GetMapping("/{ID}/theater")
-	public List<Theater> getTheaterInCity(@PathVariable(value = "ID") long ID){
+	@GetMapping("/{cityID}/theater")
+	public List<Theater> getTheaterInCity(@PathVariable(value = "cityID") long ID){
 		
 		City theCity = theCityDAO.findOne(ID);
 		
@@ -63,16 +63,16 @@ public class EndUserContoller {
 	
 //	Get Movie available on the theaters
 	
-	@GetMapping("/theater/{ID}/movie")
-	public List<Object[]> getMovieByTheaterID(@PathVariable(value = "ID") long ID){
+	@GetMapping("/theater/{theaterId}/movie")
+	public List<Object[]> getMovieByTheaterID(@PathVariable(value = "theaterId") long ID){
 		
 		return theMovieDAO.getMovieByTheaterId(ID);
 	}
 	
 //	Get Available Show for a particular movie 
 	
-	@GetMapping("/movie/{id}/show")
-	public List<Show> geShowByMovieId(@PathVariable(value ="id") long id){
+	@GetMapping("/movie/{movieId}/show")
+	public List<Show> geShowByMovieId(@PathVariable(value ="movieId") long id){
 		
 		Movie theMovie = theMovieDAO.findOne(id);
 	
@@ -81,16 +81,16 @@ public class EndUserContoller {
 	
 //	Get the seat available for a particular Show using the show ID
 	
-	@GetMapping("/show/{id}")
-	public Bookings getAvailableSeat(@PathVariable ( value = "id") long id)
+	@GetMapping("/show/{showId}")
+	public Bookings getAvailableSeat(@PathVariable ( value = "showId") long id)
 	{
 		return theBookingsDAO.getAvailableSeat(id);
 	}
 	
 //	Book a Seat using the show id By passing the show POJO to the API 
 	
-	@PostMapping("show/{id}/bookings")
-	public Bookings bookSeatForShow(@PathVariable (value = "id") long id, @Valid @RequestBody Bookings b)
+	@PostMapping("show/{showId}/bookings")
+	public Bookings bookSeatForShow(@PathVariable (value = "showId") long id, @Valid @RequestBody Bookings b)
 	{
 		return theBookingsDAO.bookTheSeat(b);
 	}
