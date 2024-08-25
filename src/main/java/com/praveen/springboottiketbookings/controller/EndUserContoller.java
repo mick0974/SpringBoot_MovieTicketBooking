@@ -92,6 +92,7 @@ public class EndUserContoller {
 	@PostMapping("show/{showId}/bookings")
 	public Bookings bookSeatForShow(@PathVariable (value = "showId") long id, @Valid @RequestBody Bookings b)
 	{
+		b.setShow_id(id);
 		return theBookingsDAO.bookTheSeat(b);
 	}
 	
